@@ -65,6 +65,7 @@ langchain_core
 fastapi
 langserve
 arxiv
+groq
 wikipedia
 validators==0.28.1
 youtube_transcript_api
