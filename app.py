@@ -99,7 +99,7 @@ if st.button("Summarize Content from YouTube or Website"):
                     except Exception as e:
                         st.warning("Failed to retrieve data using PyTube. Trying to get the video transcript.")
                         try:
-                            video_id = generic_url.split("v=")[-1]
+                            video_id = generic_url.split("v=")[-1].split("&")[0]
                             transcript = YouTubeTranscriptApi.get_transcript(video_id)
                             transcript_text = " ".join([entry['text'] for entry in transcript])
                             docs = [transcript_text]
