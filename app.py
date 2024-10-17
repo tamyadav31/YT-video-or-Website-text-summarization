@@ -68,12 +68,14 @@ st.title("😊 Langchain: Summarize Text from YouTube or Website")
 st.subheader("Summarize URL")
 
 # Get GROQ API key from the user and URL to be summarized
-st.sidebar.title("Settings")
-api_key=st.text_input("enter your groq api key :" , type="password")
+with st.sidebar:
+    groq_api_key = os.environ.get("GROQ_API_KEY", "")
+    if not groq_api_key:
+        groq_api_key = st.text_input("Groq API Key", value="", type="password")
 
 generic_url = st.text_input("Enter URL here", label_visibility="collapsed")
 
-llm = ChatGroq(groq_api_key=api_key, model_name="Gemma-7b-It")
+llm = ChatGroq(groq_api_key=groq_api_key, model_name="Gemma-7b-It")
 
 prompt_template = """
 Provide a summary of the following content in 300 words:
@@ -84,7 +86,7 @@ prompt = PromptTemplate(template=prompt_template, input_variables=["text"])
 
 if st.button("Summarize Content from YouTube or Website"):
     # Validate all inputs
-    if not api_key.strip() or not generic_url.strip():
+    if not groq_api_key.strip() or not generic_url.strip():
         st.error("Please provide the necessary information to get started.")
     elif not validators.url(generic_url):
         st.error("Please provide a valid URL. It can be a YouTube video or website URL.")
