@@ -53,6 +53,7 @@
         #         chain=load_summarize_chain(llm , chain_type="stuff" , prompt=prompt)
         #         output_summary=chain.run(docs)
 
+
 import validators
 import streamlit as st
 from langchain.prompts import PromptTemplate
@@ -122,7 +123,4 @@ if st.button("Summarize Content from YouTube or Website"):
             st.error(f"An error occurred: {e}")
 
                 
-                st.success(output_summary)
-                
-        except Exception as e:
-             st.exception(f"exception:{e}")
+            
