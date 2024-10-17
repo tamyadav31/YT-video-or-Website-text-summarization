@@ -61,6 +61,7 @@ from langchain_groq import ChatGroq
 from langchain.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import YoutubeLoader, UnstructuredURLLoader
 from youtube_transcript_api import YouTubeTranscriptApi
+from pytube import YouTube
 
 # Streamlit app configuration
 st.set_page_config(page_title="Langchain: Summarize Text from YouTube or Website", page_icon="😊")
@@ -105,7 +106,16 @@ if st.button("Summarize Content from YouTube or Website"):
                             docs = [transcript_text]
                         except Exception as transcript_error:
                             st.error(f"Could not extract video transcript. Error: {transcript_error}")
-                            docs = None
+                            try:
+                                from pytube import YouTube
+                                yt = YouTube(generic_url)
+                                video_description = yt.description
+                                docs = [video_description]
+                                st.info("No transcript available. Using video description as fallback.")
+                            except Exception as desc_error:
+                                st.error(f"Could not extract video description either. Error: {desc_error}")
+                                docs = None
+    
                 else:
                     loader = UnstructuredURLLoader(urls=[generic_url], ssl_verify=False,
                                                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"})
