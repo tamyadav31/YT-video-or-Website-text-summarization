@@ -12,12 +12,15 @@ st.title=("😊 langchain:summarize text from yt or website")
 st.subheader("summarize url")
 
 ## get groq api key from the user and url to be summarized 
-with st.sidebar:
-    groq_api_key= st.text_input("groq api key", value="" , type="password")
+# with st.sidebar:
+#     groq_api_key= st.text_input("groq api key", value="" , type="password")
+
+st.sidebar.title("Settings")
+api_key=st.text_input("enter your groq api key :" , type="password")
     
 generic_url=st.text_input("url", label_visibility="collapsed")
 
-llm=ChatGroq(groq_api_key=groq_api_key , model_name="Gemma-7b-It")
+llm=ChatGroq(groq_api_key=api_key , model_name="Gemma-7b-It")
 
 prompt_template="""
 provide summary of the foloowing content in 300 words:
