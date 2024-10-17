@@ -69,9 +69,7 @@ st.subheader("Summarize URL")
 
 # Get GROQ API key from the user and URL to be summarized
 with st.sidebar:
-    groq_api_key = os.environ.get("GROQ_API_KEY", "")
-    if not groq_api_key:
-        groq_api_key = st.text_input("Groq API Key", value="", type="password")
+    groq_api_key = st.text_input("GROQ API Key", value=" ", type="password")
 
 generic_url = st.text_input("Enter URL here", label_visibility="collapsed")
 
