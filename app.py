@@ -108,7 +108,7 @@ if st.button("Summarize Content from YouTube or Website"):
                             docs = None
                 else:
                     loader = UnstructuredURLLoader(urls=[generic_url], ssl_verify=False,
-                                                   headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"})
+                                                   headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"})
                     docs = loader.load()
                 
                 # Chain for summarization
